@@ -1,163 +1,125 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Meta de vendas — Comercial</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta de vendas - Comercial</title>
 <meta http-equiv="refresh" content="330">
 <style>
-:root{
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
-  --bg:#F3F6F9; --surface:#FFFFFF; --ink:#13293D; --muted:#5B6B7A;
-  --track:#DCE4EC; --done:#1B6E8C; --done-2:#2A9CC0; --gap:#E3A82B; --line:#C9D4DE;
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  background: #F3F6F9; color: #13293D;
+  font-family: "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
 }
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0E1A26; --surface:#15263A; --ink:#E8EEF4; --muted:#9AAABB;
-    --track:#223850; --done:#2A9CC0; --done-2:#5CC3E3; --gap:#F0B940; --line:#2C4560;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0E1A26; --surface:#15263A; --ink:#E8EEF4; --muted:#9AAABB;
-  --track:#223850; --done:#2A9CC0; --done-2:#5CC3E3; --gap:#F0B940; --line:#2C4560;
-}
-*,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  font-variant-numeric:tabular-nums;line-height:1.5}
-html,body{height:100%}
-main{max-width:1600px;min-height:100%;margin:0 auto;padding:clamp(20px,4vw,64px) clamp(16px,4vw,64px);
-  display:flex;flex-direction:column;justify-content:center}
-@media (min-width:1200px){
-  h1{font-size:2.4vw!important}.sub{font-size:1.3vw!important}
-  .chart{grid-template-columns:minmax(300px,34vw) 1fr!important}
-  .pie{max-width:min(34vw,60vh)!important}
-  .pct{font-size:9vw!important}.hero p{font-size:1.5vw!important}
-  .legend{font-size:1.2vw}.figures dt{font-size:1.1vw!important}.figures dd{font-size:2vw!important}
-}
-h1{font-size:clamp(1.1rem,2.4vw,1.35rem);font-weight:600;margin:0 0 4px}
-.sub{color:var(--muted);margin:0 0 clamp(24px,5vw,40px);font-size:.95rem}
-
-.hero{display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 24px;margin-bottom:20px}
-.pct{font-size:clamp(4rem,14vw,7.5rem);font-weight:800;line-height:.9;letter-spacing:-.03em;color:var(--done)}
-.pct small{font-size:.45em;font-weight:600;margin-left:2px}
-.hero p{margin:0 0 .6em;max-width:32ch;color:var(--muted);font-size:1.05rem}
-.hero p strong{color:var(--ink)}
-
-.chart{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:clamp(20px,5vw,48px);align-items:center}
-@media (max-width:620px){.chart{grid-template-columns:1fr;justify-items:center}}
-.pie{width:100%;max-width:340px;height:auto;display:block}
-.pie .s-done{fill:var(--done)}
-.pie .s-gap{fill:var(--gap)}
-.pie path{stroke:var(--bg);stroke-width:3;transform-origin:50% 50%;transform:scale(.6);opacity:0;
-  transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .6s}
-.pie.on path{transform:scale(1);opacity:1}
-.pie text{font-family:inherit;font-weight:700;font-size:13px;fill:#fff}
-.legend{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;color:var(--muted)}
-.legend li{display:flex;align-items:center;gap:10px}
-.legend b{width:14px;height:14px;border-radius:3px;flex:none}
-@media (prefers-reduced-motion:reduce){.pie path{transition:none}}
-.figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;
-  background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:32px}
-.figures div{background:var(--surface);padding:18px 20px}
-.figures dt{color:var(--muted);font-size:.9rem;margin-bottom:4px}
-.figures dd{margin:0;font-size:clamp(1.3rem,3.2vw,1.6rem);font-weight:600}
-.figures .k-done dd{color:var(--done)}
-.figures .k-gap dd{color:var(--gap)}
-
-summary{cursor:pointer;width:max-content}
-summary:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--done-2);outline-offset:2px}
-.edit{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-top:14px}
-.edit label{display:flex;flex-direction:column;gap:4px}
-.edit input{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--ink);width:170px}
-.edit button{font:inherit;font-weight:600;padding:9px 16px;border:0;border-radius:4px;background:var(--done);color:#fff;cursor:pointer}
+.wrap { padding: 3.5vw 5vw; }
+h1 { font-size: 2.6vw; font-weight: 600; margin: 0 0 0.4vw 0; }
+.sub { color: #5B6B7A; font-size: 1.4vw; margin: 0 0 2.5vw 0; }
+.chart { display: -webkit-box; display: -webkit-flex; display: flex;
+  -webkit-box-align: center; -webkit-align-items: center; align-items: center; }
+.pie { width: 34vw; height: 34vw; max-width: 60vh; max-height: 60vh;
+  -webkit-flex-shrink: 0; flex-shrink: 0; }
+.pie svg { width: 100%; height: 100%; display: block; }
+.info { margin-left: 5vw; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; }
+.pct { font-size: 9vw; font-weight: 800; line-height: 0.9; color: #1B6E8C; letter-spacing: -0.03em; }
+.pct small { font-size: 0.45em; font-weight: 600; }
+.msg { color: #5B6B7A; font-size: 1.6vw; margin: 1vw 0 1.5vw 0; }
+.msg strong { color: #13293D; }
+.legend { color: #5B6B7A; font-size: 1.3vw; margin-bottom: 2vw; }
+.legend span { display: inline-block; width: 1.1vw; height: 1.1vw; border-radius: 3px;
+  vertical-align: middle; margin-right: 0.6vw; }
+.legend div { margin-bottom: 0.5vw; }
+.card { background: #FFFFFF; border: 1px solid #C9D4DE; border-radius: 6px;
+  padding: 1vw 1.4vw; margin-bottom: 0.8vw; overflow: hidden; }
+.card .lab { float: left; color: #5B6B7A; font-size: 1.3vw; line-height: 2.6vw; }
+.card .val { float: right; font-size: 2.1vw; font-weight: 700; line-height: 2.6vw; }
 </style>
 </head>
 <body>
-<main>
+<div class="wrap">
   <h1>Meta de vendas da equipe comercial</h1>
   <p class="sub" id="updated">Acompanhamento do valor vendido no período</p>
 
-  <section class="chart">
-    <svg class="pie" id="pie" viewBox="0 0 200 200" role="img"></svg>
-    <div>
-      <div class="hero" aria-live="polite">
-        <div class="pct" id="pct">0<small>%</small></div>
-        <p id="msg">Carregando…</p>
+  <div class="chart">
+    <div class="pie" id="pie"></div>
+    <div class="info">
+      <div class="pct" id="pct">0<small>%</small></div>
+      <p class="msg" id="msg">Carregando...</p>
+      <div class="legend">
+        <div><span style="background:#1B6E8C"></span>Vendido</div>
+        <div><span style="background:#E3A82B"></span>Falta para a meta</div>
       </div>
-      <ul class="legend">
-        <li><b style="background:var(--done)"></b>Vendido</li>
-        <li><b style="background:var(--gap)"></b>Falta para a meta</li>
-      </ul>
+      <div class="card"><span class="lab">Vendido até agora</span><span class="val" id="v-sold" style="color:#1B6E8C">-</span></div>
+      <div class="card"><span class="lab">Meta</span><span class="val" id="v-goal">-</span></div>
+      <div class="card"><span class="lab">Falta para a meta</span><span class="val" id="v-gap" style="color:#C98A0C">-</span></div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <dl class="figures">
-    <div class="k-done"><dt>Vendido até agora</dt><dd id="v-sold">–</dd></div>
-    <div><dt>Meta</dt><dd id="v-goal">–</dd></div>
-    <div class="k-gap"><dt>Falta para a meta</dt><dd id="v-gap">–</dd></div>
-  </dl>
-
-</main>
 <script>
 // ===== VALORES DO PAINEL (altere apenas estas 3 linhas) =====
-const META     = 200000.00;
-const VENDIDO  = 182516.43;
-const UPDATED  = "29/09/2026 às 10:47";
+var META     = 200000.00;
+var VENDIDO  = 182516.43;
+var UPDATED  = "29/09/2026 às 10:47";
 // ============================================================
-const DEFAULTS = { goal: META, sold: VENDIDO };
-const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
-const brlShort = v => "R$ " + (v/1000).toLocaleString("pt-BR",{maximumFractionDigits:0}) + " mil";
-const parse = s => Number(String(s).replace(/[R$\s.]/g,"").replace(",", "."));
 
-let state = {...DEFAULTS};
+function brl(v) {
+  var neg = v < 0; v = Math.abs(v);
+  var parts = v.toFixed(2).split(".");
+  var inteiro = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return (neg ? "-" : "") + "R$ " + inteiro + "," + parts[1];
+}
+function pctTxt(v) { return v.toFixed(1).replace(".", ","); }
+function mil(v) { return "R$ " + Math.round(v / 1000) + " mil"; }
 
-function render(){
-  const {goal, sold} = state;
-  const ratio = sold / goal;
-  const pct = ratio * 100;
-  const shown = Math.min(pct, 100);
-  const gap = Math.max(goal - sold, 0);
+function render() {
+  var pct = VENDIDO / META * 100;
+  var shown = pct > 100 ? 100 : (pct < 0 ? 0 : pct);
+  var gap = META - VENDIDO; if (gap < 0) gap = 0;
 
-  document.getElementById("pct").innerHTML =
-    pct.toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1}) + "<small>%</small>";
-  document.getElementById("msg").innerHTML = gap > 0
-    ? `da meta atingida. Faltam <strong>${brl(gap)}</strong> para chegar a ${brlShort(goal)}.`
-    : `da meta atingida. Meta batida, com <strong>${brl(sold - goal)}</strong> acima do objetivo.`;
-
-  const pie = document.getElementById("pie");
-  pie.setAttribute("aria-label", `Gráfico de pizza: ${pct.toFixed(1)}% da meta vendida`);
-  const r = 96, c = 100, a = shown/100 * 2*Math.PI;
-  const pt = ang => [c + r*Math.sin(ang), c - r*Math.cos(ang)];
-  const lbl = (mid, txt) => { const x = c + r*.6*Math.sin(mid), y = c - r*.6*Math.cos(mid);
-    return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle">${txt}</text>`; };
-  const fmt = v => v.toLocaleString("pt-BR",{maximumFractionDigits:1}) + "%";
-  let svg = "";
-  if (shown >= 100) {
-    svg = `<path class="s-done" d="M${c} ${c-r}A${r} ${r} 0 1 1 ${c-.01} ${c-r}Z"/>` + lbl(Math.PI, "100%");
+  document.getElementById("pct").innerHTML = pctTxt(pct) + "<small>%</small>";
+  if (gap > 0) {
+    document.getElementById("msg").innerHTML = "da meta atingida. Faltam <strong>" + brl(gap) +
+      "</strong> para chegar a " + mil(META) + ".";
   } else {
-    const [x1,y1] = pt(a);
-    svg = `<path class="s-done" d="M${c} ${c}L${c} ${c-r}A${r} ${r} 0 ${a>Math.PI?1:0} 1 ${x1} ${y1}Z"/>`
-        + `<path class="s-gap" d="M${c} ${c}L${x1} ${y1}A${r} ${r} 0 ${a>Math.PI?0:1} 1 ${c} ${c-r}Z"/>`
-        + lbl(a/2, fmt(shown));
-    if (100-shown >= 6) svg += lbl(a + (2*Math.PI-a)/2, fmt(100-shown));
+    document.getElementById("msg").innerHTML = "da meta atingida. Meta batida, com <strong>" +
+      brl(VENDIDO - META) + "</strong> acima do objetivo.";
   }
-  pie.innerHTML = svg;
-  pie.classList.remove("on");
-  requestAnimationFrame(() => requestAnimationFrame(() => pie.classList.add("on")));
+  document.getElementById("updated").innerHTML = "Valores atualizados em " + UPDATED;
+  document.getElementById("v-sold").innerHTML = brl(VENDIDO);
+  document.getElementById("v-goal").innerHTML = brl(META);
+  document.getElementById("v-gap").innerHTML = brl(gap);
 
-  document.getElementById("v-sold").textContent = brl(sold);
-  document.getElementById("v-goal").textContent = brl(goal);
-  document.getElementById("v-gap").textContent = brl(gap);
-  document.getElementById("updated").textContent = "Valores atualizados em " + UPDATED;
+  // Gráfico de pizza
+  var r = 96, c = 100, a = shown / 100 * 2 * Math.PI;
+  function px(ang) { return (c + r * Math.sin(ang)).toFixed(2); }
+  function py(ang) { return (c - r * Math.cos(ang)).toFixed(2); }
+  function label(mid, txt, size) {
+    var x = (c + r * 0.6 * Math.sin(mid)).toFixed(2), y = (c - r * 0.6 * Math.cos(mid) + size * 0.35).toFixed(2);
+    return '<text x="' + x + '" y="' + y + '" text-anchor="middle" font-family="Arial, sans-serif" ' +
+      'font-weight="bold" font-size="' + size + '" fill="#FFFFFF">' + txt + '</text>';
+  }
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">';
+  if (shown >= 100) {
+    svg += '<circle cx="100" cy="100" r="96" fill="#1B6E8C"/>' + label(Math.PI, "100%", 16);
+  } else if (shown <= 0) {
+    svg += '<circle cx="100" cy="100" r="96" fill="#E3A82B"/>';
+  } else {
+    var big = a > Math.PI ? 1 : 0;
+    svg += '<path d="M100 100 L100 4 A96 96 0 ' + big + ' 1 ' + px(a) + ' ' + py(a) + ' Z" fill="#1B6E8C" stroke="#F3F6F9" stroke-width="2"/>';
+    svg += '<path d="M100 100 L' + px(a) + ' ' + py(a) + ' A96 96 0 ' + (1 - big) + ' 1 100 4 Z" fill="#E3A82B" stroke="#F3F6F9" stroke-width="2"/>';
+    svg += label(a / 2, pctTxt(shown) + "%", 16);
+    if (100 - shown >= 6) svg += label(a + (2 * Math.PI - a) / 2, pctTxt(100 - shown) + "%", 12);
+  }
+  svg += '</svg>';
+  document.getElementById("pie").innerHTML = svg;
 }
 
 render();
-setTimeout(() => location.replace(location.pathname + "?t=" + Date.now()), 5*60*1000);
+
+// Recarrega a cada 5 minutos buscando sempre a versão mais nova
+setTimeout(function () {
+  window.location.replace(window.location.pathname + "?t=" + new Date().getTime());
+}, 5 * 60 * 1000);
 </script>
 </body>
 </html>
