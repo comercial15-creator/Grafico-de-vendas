@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Meta de vendas — Comercial</title>
+<meta http-equiv="refresh" content="330">
 <style>
 :root{
   box-sizing:border-box;
@@ -156,7 +157,7 @@ function render(){
 }
 
 render();
-setTimeout(() => location.reload(), 5*60*1000);
+setTimeout(() => location.replace(location.pathname + "?t=" + Date.now()), 5*60*1000);
 </script>
 </body>
 </html>
