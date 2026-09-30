@@ -11,27 +11,36 @@ body {
   background: #F3F6F9; color: #13293D;
   font-family: "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
 }
-.wrap { padding: 3.5vw 5vw; }
+.wrap { padding: 3vw 5vw; }
 h1 { font-size: 2.6vw; font-weight: 600; margin: 0 0 0.4vw 0; }
-.sub { color: #5B6B7A; font-size: 1.4vw; margin: 0 0 2.5vw 0; }
+.sub { color: #5B6B7A; font-size: 1.4vw; margin: 0 0 2vw 0; }
 .chart { display: -webkit-box; display: -webkit-flex; display: flex;
   -webkit-box-align: center; -webkit-align-items: center; align-items: center; }
 .pie { width: 34vw; height: 34vw; max-width: 60vh; max-height: 60vh;
   -webkit-flex-shrink: 0; flex-shrink: 0; }
 .pie svg { width: 100%; height: 100%; display: block; }
 .info { margin-left: 5vw; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; }
-.pct { font-size: 9vw; font-weight: 800; line-height: 0.9; color: #1B6E8C; letter-spacing: -0.03em; }
+.pct { font-size: 8vw; font-weight: 800; line-height: 0.9; color: #1B6E8C; letter-spacing: -0.03em; }
 .pct small { font-size: 0.45em; font-weight: 600; }
-.msg { color: #5B6B7A; font-size: 1.6vw; margin: 1vw 0 1.5vw 0; }
+.msg { color: #5B6B7A; font-size: 1.5vw; margin: 0.9vw 0 1.2vw 0; }
 .msg strong { color: #13293D; }
-.legend { color: #5B6B7A; font-size: 1.3vw; margin-bottom: 2vw; }
+.legend { color: #5B6B7A; font-size: 1.2vw; margin-bottom: 1.2vw; }
 .legend span { display: inline-block; width: 1.1vw; height: 1.1vw; border-radius: 3px;
   vertical-align: middle; margin-right: 0.6vw; }
-.legend div { margin-bottom: 0.5vw; }
-.card { background: #FFFFFF; border: 1px solid #C9D4DE; border-radius: 6px;
-  padding: 1vw 1.4vw; margin-bottom: 0.8vw; overflow: hidden; }
-.card .lab { float: left; color: #5B6B7A; font-size: 1.3vw; line-height: 2.6vw; }
-.card .val { float: right; font-size: 2.1vw; font-weight: 700; line-height: 2.6vw; }
+.legend div { display: inline-block; margin-right: 2vw; }
+.card { background: #FFFFFF; border: 1px solid #C9D4DE; border-left: 0.4vw solid #C9D4DE; border-radius: 6px;
+  padding: 0.7vw 1.4vw; margin-bottom: 0.7vw;
+  display: -webkit-box; display: -webkit-flex; display: flex;
+  -webkit-box-align: center; -webkit-align-items: center; align-items: center;
+  -webkit-box-pack: justify; -webkit-justify-content: space-between; justify-content: space-between; }
+.card .lab { color: #5B6B7A; font-size: 1.3vw; }
+.card .st { display: block; font-size: 1.1vw; font-weight: 600; margin-top: 0.15vw; }
+.card .val { font-size: 2vw; font-weight: 700; }
+.card.sold { border-left-color: #1B6E8C; }
+.card.ok { border-left-color: #2E8B57; }
+.card.ok .st { color: #2E8B57; }
+.card.pend { border-left-color: #E3A82B; }
+.card.pend .st { color: #C98A0C; }
 
 /* ===== Animação de nova venda ===== */
 #nv { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 999;
@@ -42,6 +51,7 @@ h1 { font-size: 2.6vw; font-weight: 600; margin: 0 0 0.4vw 0; }
 #nv .tit { font-size: 8vw; font-weight: 900; color: #F0B940; letter-spacing: -0.02em; line-height: 1;
   text-shadow: 0 0.4vw 2vw rgba(240, 185, 64, 0.45);
   -webkit-animation: nvPulse 1.2s ease-in-out infinite; animation: nvPulse 1.2s ease-in-out infinite; }
+#nv .tit.longo { font-size: 5.5vw; }
 #nv .val { font-size: 6vw; font-weight: 800; color: #FFFFFF; margin-top: 2.5vw; }
 #nv .tot { font-size: 2vw; color: #9AAABB; margin-top: 1.5vw; }
 #nv .tot strong { color: #2A9CC0; }
@@ -71,15 +81,15 @@ h1 { font-size: 2.6vw; font-weight: 600; margin: 0 0 0.4vw 0; }
       <p class="msg" id="msg">Carregando...</p>
       <div class="legend">
         <div><span style="background:#1B6E8C"></span>Vendido</div>
-        <div><span style="background:#E3A82B"></span>Falta para a meta</div>
+        <div><span style="background:#E3A82B"></span>Falta para a meta principal</div>
       </div>
-      <div class="card"><span class="lab">Vendido até agora</span><span class="val" id="v-sold" style="color:#1B6E8C">-</span></div>
-      <div class="card"><span class="lab">Meta</span><span class="val" id="v-goal">-</span></div>
-      <div class="card"><span class="lab">Falta para a meta</span><span class="val" id="v-gap" style="color:#C98A0C">-</span></div>
+      <div class="card sold"><span class="lab">Vendido até agora</span><span class="val" id="v-sold" style="color:#1B6E8C">-</span></div>
+      <div class="card" id="c-m1"><span class="lab">Meta principal<span class="st" id="s-m1"></span></span><span class="val" id="v-m1">-</span></div>
+      <div class="card" id="c-m2"><span class="lab">Meta secundária<span class="st" id="s-m2"></span></span><span class="val" id="v-m2">-</span></div>
+      <div class="card" id="c-m3"><span class="lab">Meta terciária<span class="st" id="s-m3"></span></span><span class="val" id="v-m3">-</span></div>
     </div>
   </div>
 </div>
-
 
 <!-- Tela de comemoração (aparece sozinha quando o valor vendido aumenta) -->
 <div id="nv"><div class="box">
@@ -89,10 +99,14 @@ h1 { font-size: 2.6vw; font-weight: 600; margin: 0 0 0.4vw 0; }
 </div></div>
 
 <script>
-// ===== VALORES DO PAINEL (altere apenas estas 3 linhas) =====
-var META     = 210000.00;
+// ===== METAS (só mude se as metas mudarem) =====
+var META     = 200000.00;   // meta principal
+var META2    = 210000.00;   // meta secundária
+var META3    = 220000.00;   // meta terciária
+
+// ===== VALORES DO PAINEL (altere apenas estas 2 linhas) =====
 var VENDIDO  = 210757.85;
-var UPDATED  = "30/09/2026 às 17:08";
+var UPDATED  = "30/09/2026 às 16:21";
 // ============================================================
 
 function brl(v) {
@@ -103,24 +117,45 @@ function brl(v) {
 }
 function pctTxt(v) { return v.toFixed(1).replace(".", ","); }
 function mil(v) { return "R$ " + Math.round(v / 1000) + " mil"; }
+function nivel(v) { return v >= META3 ? 3 : (v >= META2 ? 2 : (v >= META ? 1 : 0)); }
+
+function cardMeta(n, valor) {
+  var card = document.getElementById("c-m" + n);
+  document.getElementById("v-m" + n).innerHTML = brl(valor);
+  if (VENDIDO >= valor) {
+    card.className = "card ok";
+    document.getElementById("s-m" + n).innerHTML = "✔ Batida";
+  } else {
+    card.className = "card pend";
+    document.getElementById("s-m" + n).innerHTML = "Faltam " + brl(valor - VENDIDO);
+  }
+}
 
 function render() {
   var pct = VENDIDO / META * 100;
   var shown = pct > 100 ? 100 : (pct < 0 ? 0 : pct);
-  var gap = META - VENDIDO; if (gap < 0) gap = 0;
+  var n = nivel(VENDIDO);
 
   document.getElementById("pct").innerHTML = pctTxt(pct) + "<small>%</small>";
-  if (gap > 0) {
-    document.getElementById("msg").innerHTML = "da meta atingida. Faltam <strong>" + brl(gap) +
-      "</strong> para chegar a " + mil(META) + ".";
+  var msg;
+  if (n === 0) {
+    msg = "da meta atingida. Faltam <strong>" + brl(META - VENDIDO) + "</strong> para chegar a " + mil(META) + ".";
+  } else if (n === 1) {
+    msg = "da meta principal. Meta batida! Faltam <strong>" + brl(META2 - VENDIDO) +
+      "</strong> para a meta secundária de " + mil(META2) + ".";
+  } else if (n === 2) {
+    msg = "da meta principal. Meta secundária batida! Faltam <strong>" + brl(META3 - VENDIDO) +
+      "</strong> para a meta terciária de " + mil(META3) + ".";
   } else {
-    document.getElementById("msg").innerHTML = "da meta atingida. Meta batida, com <strong>" +
-      brl(VENDIDO - META) + "</strong> acima do objetivo.";
+    msg = "da meta principal. Todas as metas batidas, com <strong>" + brl(VENDIDO - META3) +
+      "</strong> acima da meta terciária!";
   }
+  document.getElementById("msg").innerHTML = msg;
   document.getElementById("updated").innerHTML = "Valores atualizados em " + UPDATED;
   document.getElementById("v-sold").innerHTML = brl(VENDIDO);
-  document.getElementById("v-goal").innerHTML = brl(META);
-  document.getElementById("v-gap").innerHTML = brl(gap);
+  cardMeta(1, META);
+  cardMeta(2, META2);
+  cardMeta(3, META3);
 
   // Gráfico de pizza
   var r = 96, c = 100, a = shown / 100 * 2 * Math.PI;
@@ -133,7 +168,10 @@ function render() {
   }
   var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">';
   if (shown >= 100) {
-    svg += '<circle cx="100" cy="100" r="96" fill="#1B6E8C"/>' + label(Math.PI, "100%", 16);
+    // Meta principal batida: pizza cheia, mostrando o percentual real (ex.: 104,5%)
+    svg += '<circle cx="100" cy="100" r="96" fill="#1B6E8C"/>';
+    svg += '<text x="100" y="' + (100 + 26 * 0.35).toFixed(2) + '" text-anchor="middle" font-family="Arial, sans-serif" ' +
+      'font-weight="bold" font-size="26" fill="#FFFFFF">' + pctTxt(pct) + '%</text>';
   } else if (shown <= 0) {
     svg += '<circle cx="100" cy="100" r="96" fill="#E3A82B"/>';
   } else {
@@ -150,11 +188,8 @@ function render() {
 render();
 
 // ===== Animação de nova venda =====
-// Compara o valor vendido com o da última vez que a página abriu.
-// Se aumentou, mostra a comemoração por DURACAO_SEGUNDOS.
-// Para testar sem mexer nos valores, abra a página com ?teste no final do endereço.
+// Para testar, abra a página com ?teste no final do endereço.
 var DURACAO_SEGUNDOS = 30;
-// Uma chave por página, para painéis diferentes no mesmo site do GitHub não se misturarem
 var CHAVE = "painel_ultimo_vendido_" + window.location.pathname.replace(/[^a-zA-Z0-9]/g, "_");
 
 function lerAnterior() {
@@ -167,12 +202,16 @@ function salvarAtual(v) {
   try { document.cookie = CHAVE + "=" + v + "; max-age=31536000; path=/"; } catch (e) {}
 }
 
-function comemorar(diferenca, bateuMeta) {
+// metaBatida: 0 = só nova venda, 1 = principal, 2 = secundária, 3 = terciária
+function comemorar(diferenca, metaBatida) {
   var nv = document.getElementById("nv");
-  document.getElementById("nv-tit").innerHTML = bateuMeta ? "🏆 META BATIDA! 🏆" : "💥 NOVA VENDA! 💥";
+  var tit = document.getElementById("nv-tit");
+  var titulos = ["💥 NOVA VENDA! 💥", "🏆 META BATIDA! 🏆", "🏆 META SECUNDÁRIA BATIDA! 🏆", "🏆 META TERCIÁRIA BATIDA! 🏆"];
+  tit.innerHTML = titulos[metaBatida];
+  tit.className = metaBatida >= 2 ? "tit longo" : "tit";
   document.getElementById("nv-val").innerHTML = "+ " + brl(diferenca);
   document.getElementById("nv-tot").innerHTML = "Total vendido: <strong>" + brl(VENDIDO) +
-    "</strong> (" + pctTxt(VENDIDO / META * 100) + "% da meta)";
+    "</strong> (" + pctTxt(VENDIDO / META * 100) + "% da meta principal)";
 
   var cores = ["#F0B940", "#2A9CC0", "#FFFFFF", "#E8664A", "#5FC98B"];
   for (var i = 0; i < 70; i++) {
@@ -196,9 +235,10 @@ function comemorar(diferenca, bateuMeta) {
   var teste = window.location.search.indexOf("teste") !== -1;
   var anterior = lerAnterior();
   if (teste) {
-    comemorar(1500, false);
+    comemorar(1500, 0);
   } else if (anterior !== null && !isNaN(anterior) && VENDIDO > anterior + 0.004) {
-    comemorar(VENDIDO - anterior, anterior < META && VENDIDO >= META);
+    var novo = nivel(VENDIDO);
+    comemorar(VENDIDO - anterior, novo > nivel(anterior) ? novo : 0);
   }
   if (!teste) salvarAtual(VENDIDO);
 })();
