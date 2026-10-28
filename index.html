@@ -110,45 +110,53 @@ body {
 .cz-legend span { display: inline-block; margin-right: 36px; }
 .cz-dot { display: inline-block; width: 18px; height: 18px; border-radius: 50%; vertical-align: -3px; margin-right: 10px; box-sizing: border-box; }
 .cz-dot.w { background: #14213a; border: 3px solid #f2b531; }
-.cz-dot.s { background: #d5d9e2; }
+.cz-dot.s { background: #2a3550; border: 3px solid #97a0b5; }
+.cz-dot.r { background: #131e36; border: 3px solid #eef1f7; }
 .cz-dot.o { border: 3px dashed #a9b3c9; }
 .cz-lanes { position: absolute; left: 64px; right: 64px; bottom: 40px; top: 40px;
   display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; }
 .cz-lanes.leg { top: 88px; }
 .cz-lane { -webkit-flex: 1; flex: 1; margin-bottom: 20px; border-radius: 20px; overflow: hidden; display: -webkit-flex; display: flex; }
 .cz-lane:last-child { margin-bottom: 0; }
-.cz-cat { width: 280px; -webkit-flex-shrink: 0; flex-shrink: 0; background: #1c2b4b; padding: 0 26px; box-sizing: border-box;
+.cz-cat { width: 260px; -webkit-flex-shrink: 0; flex-shrink: 0; background: #1c2b4b; padding: 0 26px; box-sizing: border-box;
   display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; -webkit-justify-content: center; justify-content: center; }
 .cz-cat b { font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-weight: 600; font-size: 24px; line-height: 1.1; }
-.cz-op { display: block; width: 228px; height: 64px; border-radius: 12px; padding: 7px 12px; box-sizing: border-box;
+.cz-op { display: block; width: 208px; height: 64px; border-radius: 12px; padding: 7px 12px; box-sizing: border-box;
   background-repeat: no-repeat; background-position: center; -webkit-background-size: contain; background-size: contain;
   -webkit-background-origin: content-box; background-origin: content-box; margin-bottom: 10px; -webkit-flex-shrink: 0; flex-shrink: 0; }
 .cz-op.op-tec { -webkit-background-size: cover; background-size: cover; -webkit-background-origin: border-box; background-origin: border-box; }
 .cz-cabin .cz-op { position: absolute; top: 22px; right: 22px; width: 196px; height: 66px; margin: 0; padding: 7px 12px; }
 .cz-cat small { font-size: 16px; letter-spacing: .12em; text-transform: uppercase; color: #f2b531; font-weight: 700; margin-top: 6px; }
-.cz-track { -webkit-flex: 1; flex: 1; background: #f2b531; position: relative; padding: 0 20px 0 64px;
-  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; overflow: hidden; }
+.cz-track { -webkit-flex: 1; flex: 1; min-width: 0; background: #f2b531; position: relative; padding: 6px 30px 6px 60px;
+  display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; -webkit-align-items: center; align-items: center;
+  -webkit-align-content: center; align-content: center; overflow: hidden; }
 .cz-track:before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 44px; opacity: .8;
   background-image: linear-gradient(45deg, #14213a 25%, transparent 25%, transparent 75%, #14213a 75%), linear-gradient(45deg, #14213a 25%, transparent 25%, transparent 75%, #14213a 75%);
   background-size: 22px 22px; background-position: 0 0, 11px 11px; }
-.cz-chip { position: relative; margin-right: 14px; background: #fff; color: #14213a; border-radius: 16px; padding: 10px 16px 10px 10px; white-space: nowrap;
-  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-flex-shrink: 0; flex-shrink: 0; }
-.cz-chip .p { position: absolute; top: -12px; left: -8px; background: #14213a; color: #fff; font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-size: 15px; border-radius: 999px; padding: 3px 9px; }
-.cz-chip .av { width: 44px; height: 44px; border-radius: 50%; border: 3px solid #14213a; box-sizing: border-box; margin-right: 10px; text-align: center; line-height: 38px;
-  font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-weight: 600; font-size: 16px; }
-.cz-chip .nm { font-weight: 700; font-size: 25px; }
-.cz-chip.win { background: #14213a; color: #fff; box-shadow: 0 0 0 4px #fff; }
-.cz-chip.win .av { background: #f2b531; border-color: #f2b531; color: #14213a; width: 56px; height: 56px; line-height: 50px; font-size: 19px; }
+.cz-chip { position: relative; margin: 14px 10px 10px 0; background: #131e36; color: #eef1f7; border-radius: 16px; padding: 11px 14px 11px 11px; white-space: nowrap;
+  -webkit-flex-shrink: 0; flex-shrink: 0; box-shadow: 0 2px 0 rgba(0,0,0,.12); }
+.cz-chip .ln { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; }
+.cz-chip .p { position: absolute; top: -13px; left: -8px; background: #14213a; color: #fff; font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-size: 15px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
+.cz-chip .av { width: 44px; height: 44px; border-radius: 50%; border: 3px solid #eef1f7; box-sizing: border-box; margin-right: 10px; text-align: center; line-height: 38px;
+  font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-weight: 600; font-size: 17px; }
+.cz-chip .nm { font-weight: 700; font-size: 22px; }
+.cz-chip .tg { display: block; margin-top: 8px; font-size: 14px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #a3abbe; }
+.cz-chip.win { background: #1c2b4b; color: #fff; box-shadow: 0 0 0 3px #131e36, 0 8px 18px rgba(20,33,58,.45); -webkit-transform: scale(1.06); transform: scale(1.06); margin-left: 4px; margin-right: 14px; }
+.cz-chip.win .av { background: #f2b531; border-color: #f2b531; color: #14213a; width: 60px; height: 60px; line-height: 54px; font-size: 20px; }
+.cz-chip.win .tg { color: #f2b531; }
 .cz-chip.win .p { background: #f2b531; color: #14213a; }
-.cz-chip.skip { background: #d5d9e2; color: #5f6780; }
-.cz-chip.skip .av { border-color: #8d94a8; }
-.cz-chip.out { background: transparent; border: 3px dashed rgba(20,33,58,.55); }
-.cz-chip.out .av { border-style: dashed; }
-.cz-pod { width: 300px; -webkit-flex-shrink: 0; flex-shrink: 0; background: #1c2b4b; padding: 0 28px; box-sizing: border-box;
+.cz-chip.skip { background: #2a3550; color: #97a0b5; }
+.cz-chip.skip .av { border-color: #97a0b5; color: #97a0b5; }
+.cz-chip.skip .tg { color: #97a0b5; }
+.cz-chip.out { background: transparent; border: 3px dashed rgba(20,33,58,.45); box-shadow: none; color: #14213a; }
+.cz-chip.out .av { border-style: dashed; border-color: rgba(20,33,58,.55); color: #14213a; }
+.cz-chip.out .tg { color: rgba(20,33,58,.75); }
+.cz-pod { width: 300px; -webkit-flex-shrink: 0; flex-shrink: 0; background: #1c2b4b; padding: 0 24px 0 50px; margin-left: -26px; position: relative; z-index: 1;
+  -webkit-clip-path: polygon(26px 0, 100% 0, 100% 100%, 0 100%); clip-path: polygon(26px 0, 100% 0, 100% 100%, 0 100%); box-sizing: border-box;
   display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; -webkit-justify-content: center; justify-content: center; }
 .cz-pod div { margin: 7px 0; }
 .cz-pod .cab { display: block; font-size: 18px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: #f2b531; }
-.cz-pod .wn { display: block; font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-weight: 800; font-size: 36px; text-transform: uppercase; line-height: 1.05; margin-top: 4px; }
+.cz-pod .wn { display: block; font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-weight: 800; font-size: 32px; text-transform: uppercase; line-height: 1.05; margin-top: 4px; }
 
 .cz-foot { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: #0f1a30; padding: 0 64px;
   display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; }
@@ -268,7 +276,7 @@ body.na-meta .tm-neve { background: #b9c9d9; }
     <div class="cz-cabins" id="cz-cabins"></div>
   </div>
   <div class="cz-slide" id="cz-r1">
-    <div class="cz-legend"><span><i class="cz-dot w"></i>Leva a cabine</span><span><i class="cz-dot s"></i>Já tem cabine em outra categoria</span><span><i class="cz-dot o"></i>Não concorre</span></div>
+    <div class="cz-legend"><span><i class="cz-dot w"></i>Leva a cabine</span><span><i class="cz-dot r"></i>Na fila</span><span><i class="cz-dot s"></i>Já tem cabine em outra categoria</span><span><i class="cz-dot o"></i>Não concorre</span></div>
     <div class="cz-lanes leg" id="cz-lanes1"></div>
   </div>
   <div class="cz-slide" id="cz-r2">
@@ -317,19 +325,19 @@ var CRUZEIRO_FIM = "31/12/2026";
 //           "fora" = não concorre     | "fila" = na fila
 var CRUZEIRO = [
   { categoria: "TEC Group", cabines: 2, fila: [
-    ["Gabriela", "cabine"], ["Agdha", "cabine"], ["Henrique", "ja"], ["Thalita", "ja"] ] },
+    ["Gabriela", "cabine"], ["Agdha", "cabine"], ["Henrique", "ja"], ["Thalita", "ja"], ["Maynara", "ja"] ] },
   { categoria: "Alice", cabines: 1, fila: [
-    ["Andreia", "fora"], ["Thalita", "cabine"], ["Lucas", "ja"], ["Henrique", "ja"] ] },
+    ["Andreia", "fora"], ["Thalita", "cabine"], ["Lucas", "ja"], ["Henrique", "ja"], ["Gabriela", "ja"] ] },
   { categoria: "MedSênior", cabines: 1, fila: [
-    ["Lucas", "ja"], ["Andreia", "fora"], ["Henrique", "ja"], ["Gabriela", "ja"], ["Vitória", "cabine"] ] },
+    ["Lucas", "ja"], ["Andreia", "fora"], ["Henrique", "ja"], ["Gabriela", "ja"], ["Vitória", "cabine"], ["Agdha", "ja"] ] },
   { categoria: "Amil + Supermed Amil", cabines: 1, fila: [
-    ["Lucas", "cabine"], ["Andreia", "fora"], ["Thalita", "ja"], ["Agdha", "ja"] ] },
+    ["Lucas", "cabine"], ["Andreia", "fora"], ["Thalita", "ja"], ["Agdha", "ja"], ["Maynara", "ja"] ] },
   { categoria: "Affinity", cabines: 1, fila: [
-    ["Andreia", "fora"], ["Henrique", "cabine"], ["Vitória", "ja"], ["Thalita", "ja"] ] },
+    ["Andreia", "fora"], ["Henrique", "cabine"], ["Vitória", "ja"], ["Thalita", "ja"], ["Gabriela", "ja"] ] },
   { categoria: "Produtos RJ/MG", cabines: 1, fila: [
-    ["Gabriel", "cabine"], ["Gabriela", "ja"], ["Andreia", "fora"], ["Michelly", "fila"] ] },
+    ["Gabriel", "cabine"], ["Gabriela", "ja"], ["Andreia", "fora"], ["Michelly", "fila"], ["Henrique", "ja"] ] },
   { categoria: "Hapvida", cabines: 1, fila: [
-    ["Maynara", "cabine"], ["Andreia", "fora"], ["Lucas", "ja"], ["Henrique", "ja"] ] }
+    ["Maynara", "cabine"], ["Andreia", "fora"], ["Lucas", "ja"], ["Henrique", "ja"], ["Vitória", "ja"] ] }
 ];
 // ============================================================
 
@@ -451,16 +459,28 @@ function montarCruzeiro() {
   document.getElementById("cz-cabins").innerHTML = h;
 
   var cab = 0;
+  // Nome curto da categoria para a etiqueta "Já na ..."
+  var CURTO = { "Amil + Supermed Amil": "Amil" };
+  function ondeTemCabine(nome) {
+    for (var c = 0; c < CRUZEIRO.length; c++)
+      for (var f = 0; f < CRUZEIRO[c].fila.length; f++)
+        if (CRUZEIRO[c].fila[f][0] === nome && CRUZEIRO[c].fila[f][1] === "cabine") return CURTO[CRUZEIRO[c].categoria] || CRUZEIRO[c].categoria;
+    return "";
+  }
   function raia(cat) {
     var chips = "", pod = "";
-    var pos = 0;
+    var pos = 0, nc = 0;
     for (var j = 0; j < cat.fila.length; j++) {
       var nome = cat.fila[j][0], sit = cat.fila[j][1];
       // Só quem ainda concorre nesta categoria ganha posição; quem já tem cabine ou não concorre fica sem número
       var conta = (sit === "cabine" || sit === "fila");
       if (conta) pos++;
-      chips += '<div class="cz-chip ' + (CLASSE[sit] || "") + '">' + (conta ? '<span class="p">' + pos + 'º</span>' : '') + '<span class="av">' +
-        nome.substr(0, 2) + '</span><span class="nm">' + nome + '</span></div>';
+      var tag = "Na fila";
+      if (sit === "cabine") { nc++; tag = cat.cabines > 1 ? "Cabine " + nc + "ª" : "Cabine"; }
+      else if (sit === "ja") { var onde = ondeTemCabine(nome); tag = onde ? "Já na " + onde : "Já tem cabine"; }
+      else if (sit === "fora") tag = "Não concorre";
+      chips += '<div class="cz-chip ' + (CLASSE[sit] || "") + '">' + (conta ? '<span class="p">' + pos + 'º</span>' : '') +
+        '<div class="ln"><span class="av">' + nome.substr(0, 2) + '</span><span class="nm">' + nome + '</span></div><span class="tg">' + tag + '</span></div>';
       if (sit === "cabine") { pod += '<div><span class="cab">Cabine ' + num(cab) + '</span><span class="wn">' + nome + '</span></div>'; cab++; }
     }
     return '<div class="cz-lane"><div class="cz-cat">' + logo(cat.categoria) + '<b>' + cat.categoria + '</b><small>' + cat.cabines +
