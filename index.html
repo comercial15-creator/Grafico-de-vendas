@@ -8,7 +8,7 @@
 <meta http-equiv="refresh" content="900">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Figtree:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Figtree:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap">
 <style>
 html, body { margin: 0; padding: 0; height: 100%; }
 body {
@@ -83,7 +83,7 @@ body {
 .cz-conta small { display: block; font-size: 18px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; }
 .cz-conta b { display: block; font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-weight: 800; font-size: 44px; line-height: 1; margin-top: 2px; white-space: nowrap; }
 .cz-conta span { display: block; font-size: 16px; font-weight: 700; margin-top: 4px; opacity: .8; }
-.cz-brand small { display: block; font-size: 20px; letter-spacing: .16em; text-transform: uppercase; color: #a9b3c9; font-weight: 700; }
+.cz-brand small { font-style: italic; display: block; font-size: 20px; letter-spacing: .16em; text-transform: uppercase; color: #a9b3c9; font-weight: 700; }
 .cz-brand b { display: block; font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-weight: 800; font-size: 44px; line-height: 1; margin-top: 4px; }
 .cz-brand em { font-style: normal; color: #f2b531; }
 .cz-ap { text-align: right; }
@@ -157,8 +157,8 @@ body {
 .cz-lbl { -webkit-flex: 1; flex: 1; font-size: 22px; color: #a9b3c9; margin-left: 16px; }
 .cz-lbl b, .cz-cd b { color: #fff; }
 .cz-cd { font-size: 22px; color: #a9b3c9; }
-.cz-cred { font-size: 18px; color: #6f7c99; margin-left: 40px; padding-left: 40px; border-left: 2px solid #2a3858; }
-.cz-cred b { color: #a9b3c9; font-weight: 700; }
+.cz-cred { font-style: italic; font-size: 18px; color: #6f7c99; margin-left: 40px; padding-left: 40px; border-left: 2px solid #2a3858; }
+.cz-cred b { font-family: Candara, Optima, "Segoe UI", sans-serif; font-style: italic; font-weight: 700; font-size: 24px; color: #f2b531; margin-left: 4px; letter-spacing: .02em; }
 /* crédito na tela da meta */
 #cred-meta { position: fixed; right: 5vw; bottom: 1.2vw; font-size: 1vw; color: #8A99A8; z-index: 5; }
 #cred-meta b { color: #5B6B7A; }
@@ -453,9 +453,13 @@ function montarCruzeiro() {
   var cab = 0;
   function raia(cat) {
     var chips = "", pod = "";
+    var pos = 0;
     for (var j = 0; j < cat.fila.length; j++) {
       var nome = cat.fila[j][0], sit = cat.fila[j][1];
-      chips += '<div class="cz-chip ' + (CLASSE[sit] || "") + '"><span class="p">' + (j + 1) + 'º</span><span class="av">' +
+      // Só quem ainda concorre nesta categoria ganha posição; quem já tem cabine ou não concorre fica sem número
+      var conta = (sit === "cabine" || sit === "fila");
+      if (conta) pos++;
+      chips += '<div class="cz-chip ' + (CLASSE[sit] || "") + '">' + (conta ? '<span class="p">' + pos + 'º</span>' : '') + '<span class="av">' +
         nome.substr(0, 2) + '</span><span class="nm">' + nome + '</span></div>';
       if (sit === "cabine") { pod += '<div><span class="cab">Cabine ' + num(cab) + '</span><span class="wn">' + nome + '</span></div>'; cab++; }
     }
