@@ -311,8 +311,8 @@ body.na-meta .tm-neve { background: #b9c9d9; }
 <script>
 // ===== VALORES DA META (altere apenas estas 3 linhas) =====
 var META     = 200000.00;
-var VENDIDO  = 145098.48;
-var UPDATED  = "28/10/2026 às 16:15";
+var VENDIDO  = 146266.86;
+var UPDATED  = "28/10/2026 às 17:19";
 // ============================================================
 
 // ===== RANKING DO CRUZEIRO (atualizar a cada apuração) =====
@@ -616,6 +616,22 @@ setInterval(function () {
   document.getElementById("barra").style.width = (pausado ? 0 : f * 100) + "%";
   document.getElementById("cz-cd").innerHTML = Math.max(0, Math.ceil(TELAS[atual].tempo - decorrido));
 }, 250);
+
+// ===== Troca manual de tela (o rodízio automático continua normalmente) =====
+// Seta → / PageDown / Espaço / Enter: próxima tela | Seta ← / PageUp: tela anterior
+// Teclas 1, 2, 3 e 4: vão direto para cada tela | Clique ou toque na tela: próxima tela
+// Durante as animações de nova venda e de cruzeiro atualizado, a troca manual fica parada para não cortar a comemoração.
+function irPara(i) {
+  if (pausado) return;
+  mostrar((i + TELAS.length) % TELAS.length); // reinicia o contador na tela escolhida
+}
+document.addEventListener("keydown", function (e) {
+  var k = e.key || "", c = e.keyCode;
+  if (k === "ArrowRight" || k === "Right" || k === "PageDown" || k === " " || k === "Enter" || c === 39 || c === 34 || c === 32 || c === 13) { irPara(atual + 1); e.preventDefault(); }
+  else if (k === "ArrowLeft" || k === "Left" || k === "PageUp" || c === 37 || c === 33) { irPara(atual - 1); e.preventDefault(); }
+  else if (k >= "1" && k <= "9" && k.length === 1) { var n = parseInt(k, 10) - 1; if (n < TELAS.length) irPara(n); }
+});
+document.addEventListener("click", function () { irPara(atual + 1); });
 
 // ===== Temas de data =====
 // Halloween: 01/10 a 31/10 | Natal: 01/12 a 25/12 | Ano novo: 27/12 a 01/01
