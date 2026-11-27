@@ -19,7 +19,20 @@ body {
 /* ===================================================================
    TELA DA META (mesmo visual azul-marinho das telas do cruzeiro)
    =================================================================== */
-.mt-row { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; height: 100%; }
+#cz-meta.cz-slide.on { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; }
+.mt-row { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-flex: 1; flex: 1; min-height: 0; }
+/* selos das metas já batidas (as próximas metas ficam escondidas) */
+.mt-selos { display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; margin-bottom: 6px; }
+.mt-selos:empty { display: none; }
+.mt-selo { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; background: #f2b531; color: #14213a;
+  border-radius: 999px; padding: 10px 26px 10px 12px; margin: 0 16px 10px 0; font-size: 24px; font-weight: 700;
+  -webkit-animation: seloPop .6s ease-out; animation: seloPop .6s ease-out; }
+.mt-selo i { font-style: normal; width: 40px; height: 40px; border-radius: 50%; background: #14213a; color: #f2b531; text-align: center; line-height: 40px;
+  font-size: 22px; font-weight: 800; margin-right: 14px; }
+.mt-selo b { font-family: "Unbounded", "Arial Black", Arial, sans-serif; font-weight: 800; }
+@-webkit-keyframes seloPop { from { opacity: 0; -webkit-transform: scale(.8); } to { opacity: 1; -webkit-transform: none; } }
+@keyframes seloPop { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
+#cz-meta.tem-selo .pie { width: 600px; height: 600px; }
 .pie { width: 640px; height: 640px; -webkit-flex-shrink: 0; flex-shrink: 0; }
 .pie svg { width: 100%; height: 100%; display: block; }
 .info { margin-left: 100px; -webkit-flex: 1; flex: 1; }
@@ -254,6 +267,7 @@ body.na-meta .tm-neve { background: #b9c9d9; }
   </div>
 
   <div class="cz-slide" id="cz-meta">
+    <div class="mt-selos" id="mt-selos"></div>
     <div class="mt-row">
       <div class="pie" id="pie"></div>
       <div class="info">
@@ -310,10 +324,18 @@ body.na-meta .tm-neve { background: #b9c9d9; }
 
 <script>
 // ===== VALORES DA META (altere apenas estas 3 linhas) =====
-var META     = 200000.00;
+// METAS: primária, secundária e terciária, em ordem. O painel mostra sempre a próxima meta ainda não batida
+// e um selo para cada meta já batida. As metas seguintes ficam escondidas até chegar a vez delas.
+var METAS    = [170000.00, 200000.00, 210000.00];
 var VENDIDO  = 197981.32;
 var UPDATED  = "27/11/2026 às 15:51";
 // ============================================================
+
+// Quantas metas um valor já bateu (0 a 3)
+function metasBatidas(v) { var n = 0; while (n < METAS.length && v >= METAS[n] - 0.004) n++; return n; }
+// Meta da vez: a primeira ainda não batida (ou a última, se todas foram batidas)
+var NIVEL = metasBatidas(VENDIDO);
+var META  = METAS[Math.min(NIVEL, METAS.length - 1)];
 
 // ===== RANKING DO CRUZEIRO (atualizar a cada apuração) =====
 // Data da apuração. Mudou a data ou mudou quem está nas cabines = a TV mostra a animação do cruzeiro.
@@ -372,6 +394,14 @@ function render() {
       brl(VENDIDO - META) + "</strong> acima do objetivo.";
   }
   document.getElementById("updated").innerHTML = UPDATED;
+  var selos = "";
+  for (var s = 0; s < NIVEL; s++) {
+    // a última meta, quando batida, já aparece no gráfico como "Meta batida"; o selo fica para as anteriores
+    if (s === METAS.length - 1) break;
+    selos += '<div class="mt-selo"><i>✓</i><span>Meta de <b>' + mil(METAS[s]) + '</b> batida!</span></div>';
+  }
+  document.getElementById("mt-selos").innerHTML = selos;
+  document.getElementById("cz-meta").className = document.getElementById("cz-meta").className.replace(/ ?tem-selo/g, "") + (selos ? " tem-selo" : "");
   document.getElementById("v-sold").innerHTML = brl(VENDIDO);
   document.getElementById("v-goal").innerHTML = brl(META);
   document.getElementById("v-gap").innerHTML = brl(gap);
@@ -535,12 +565,20 @@ function gravar(chave, v) {
   try { document.cookie = chave + "=" + encodeURIComponent(v) + "; max-age=31536000; path=/"; } catch (e) {}
 }
 
-function comemorar(diferenca, bateuMeta) {
+function comemorar(diferenca, bateuMeta, metaBatida) {
   var nv = document.getElementById("nv");
   document.getElementById("nv-tit").innerHTML = bateuMeta ? "🏆 META BATIDA! 🏆" : "💥 NOVA VENDA! 💥";
-  document.getElementById("nv-val").innerHTML = "+ " + brl(diferenca);
-  document.getElementById("nv-tot").innerHTML = "Total vendido: <strong>" + brl(VENDIDO) +
-    "</strong> (" + pctTxt(VENDIDO / META * 100) + "% da meta)";
+  if (bateuMeta) {
+    // Ex.: "R$ 200 mil atingidos" e, se houver, "Nova meta: R$ 230 mil"
+    document.getElementById("nv-val").innerHTML = mil(metaBatida) + " atingidos";
+    document.getElementById("nv-tot").innerHTML = NIVEL < METAS.length
+      ? "Total vendido: <strong>" + brl(VENDIDO) + "</strong> · Nova meta: <strong>" + mil(META) + "</strong>"
+      : "Total vendido: <strong>" + brl(VENDIDO) + "</strong> · Todas as metas do mês foram batidas!";
+  } else {
+    document.getElementById("nv-val").innerHTML = "+ " + brl(diferenca);
+    document.getElementById("nv-tot").innerHTML = "Total vendido: <strong>" + brl(VENDIDO) +
+      "</strong> (" + pctTxt(VENDIDO / META * 100) + "% da meta)";
+  }
   confete(nv);
   nv.className = "on";
   setTimeout(function () { nv.className = "on off"; }, (DURACAO_SEGUNDOS - 1) * 1000);
@@ -691,16 +729,21 @@ function particula(alvo, classe, qtd, dmin, dmax) {
 // Para testar: ?teste (nova venda) ou ?testecruzeiro (ranking do cruzeiro) no final do endereço.
 (function () {
   var busca = window.location.search;
-  var testeVenda = busca.indexOf("teste") !== -1 && busca.indexOf("testecruzeiro") === -1;
+  var testeMeta = busca.indexOf("testemeta") !== -1;
+  var testeVenda = busca.indexOf("teste") !== -1 && busca.indexOf("testecruzeiro") === -1 && !testeMeta;
   var testeCz = busca.indexOf("testecruzeiro") !== -1;
   var fila = [];
 
   // Meta
   var anterior = parseFloat(ler(CHAVE));
   if (testeVenda) fila.push({ tipo: "venda", dif: 1500, meta: false });
-  else if (!isNaN(anterior) && VENDIDO > anterior + 0.004)
-    fila.push({ tipo: "venda", dif: VENDIDO - anterior, meta: anterior < META && VENDIDO >= META });
-  if (!testeVenda) gravar(CHAVE, VENDIDO);
+  else if (testeMeta) fila.push({ tipo: "venda", dif: 1500, meta: true, valorMeta: METAS[Math.max(0, NIVEL - 1)] });
+  else if (!isNaN(anterior) && VENDIDO > anterior + 0.004) {
+    // Bateu uma nova meta (primária, secundária ou terciária) desde a última vez que a TV abriu?
+    var nivelAntes = metasBatidas(anterior);
+    fila.push({ tipo: "venda", dif: VENDIDO - anterior, meta: NIVEL > nivelAntes, valorMeta: METAS[Math.max(0, NIVEL - 1)] });
+  }
+  if (!testeVenda && !testeMeta) gravar(CHAVE, VENDIDO);
 
   // Cruzeiro
   var nomes = [];
@@ -720,7 +763,7 @@ function particula(alvo, classe, qtd, dmin, dmax) {
     var f = fila.shift();
     pausado = true;
     if (f.tipo === "venda") {
-      mostrar(0); comemorar(f.dif, f.meta);
+      mostrar(0); comemorar(f.dif, f.meta, f.valorMeta);
       setTimeout(rodar, DURACAO_SEGUNDOS * 1000);
     } else {
       mostrar(1); festaCruzeiro(f.novos);
